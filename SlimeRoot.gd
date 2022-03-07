@@ -20,6 +20,7 @@ func _ready():
 func new_slime():
 	var newSlime = basicSlime.instance()
 	newSlime.connect("request_split", self, "perform_split")
+	newSlime.connect("request_merge", self, "perform_merge")
 	return newSlime
 
 func switch_camera(slime):
@@ -42,6 +43,22 @@ func perform_split(slime):
 	add_child(inactiveSlime)
 	switch_camera(activeSlime)
 	slime.queue_free()
+
+func perform_merge(slimes):
+	var mergedSlime = new_slime()
+	var mergedPos = Vector2.ZERO
+	var totalMass = 0
+	for slime in slimes:
+		totalMass += slime.mass
+		mergedPos += slime.position * slime.mass
+		slime.queue_free()
+	mergedPos /= totalMass
+	switch_camera(mergedSlime)
+	mergedSlime.position = mergedPos
+	mergedSlime.isActiveSlime = true
+	mergedSlime.initialize(totalMass)
+	add_child(mergedSlime)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

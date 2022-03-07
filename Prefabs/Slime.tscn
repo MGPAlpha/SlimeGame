@@ -20,7 +20,7 @@ animations = [ {
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 17.4739
+radius = 21.1464
 
 [node name="Slime" type="KinematicBody2D"]
 scale = Vector2( 2.06021, 2.06021 )
