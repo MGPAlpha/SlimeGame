@@ -20,6 +20,7 @@ func _ready():
 func new_slime():
 	var newSlime = basicSlime.instance()
 	newSlime.connect("request_split", self, "perform_split")
+	newSlime.connect("request_advanced_split", self, "perform_advanced_split")
 	newSlime.connect("request_merge", self, "perform_merge")
 	return newSlime
 
@@ -36,6 +37,24 @@ func perform_split(slime):
 	inactiveSlime.position = slime.position
 	activeSlime.initialize(oldMass / 2)
 	inactiveSlime.initialize(oldMass / 2)
+	activeSlime.motion = slime.motion
+	inactiveSlime.motion = slime.motion
+	activeSlime.isActiveSlime = true
+	add_child(activeSlime)
+	add_child(inactiveSlime)
+	switch_camera(activeSlime)
+	slime.queue_free()
+
+func perform_advanced_split(slime, direction, massRatio):
+	var oldMass = slime.mass
+	var activeMass = oldMass * massRatio
+	var inactiveMass = oldMass * (1-massRatio)
+	var activeSlime = new_slime()
+	var inactiveSlime = new_slime()
+	activeSlime.position = slime.position
+	inactiveSlime.position = slime.position
+	activeSlime.initialize(activeMass)
+	inactiveSlime.initialize(inactiveMass)
 	activeSlime.motion = slime.motion
 	inactiveSlime.motion = slime.motion
 	activeSlime.isActiveSlime = true

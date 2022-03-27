@@ -10,18 +10,25 @@ const GRAVITY = 30
 const MAXFALLSPEED = 200
 const MAXSPEED = 300
 const JUMPFORCE = 500
-const ACCELERATION = 10
+const ACCELERATION = 2000
+const DRAGX = 800
+const RATIOADJUSTSPEED = .3
 
-var mass = 100
+var mass = 1.0
 
 var motion = Vector2()
 
+var splitHoldTime = 0
+var useAdvancedSplit = false
+var splitRatio = .5
+
 signal request_split
+signal request_advanced_split
 signal request_merge
 
 func initialize(mass):
 	self.mass = mass
-	scale *= sqrt(mass / 100.0)
+	scale *= sqrt(mass)
 
 func _physics_process(delta):
 	motion = move_and_slide(motion, UP)
@@ -32,44 +39,48 @@ func _physics_process(delta):
 
 	
 	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-	
-	
+	motion.x = move_toward(motion.x, 0, delta * DRAGX)
 	
 	if isActiveSlime:
 		
-		if Input.is_action_just_pressed("split"):
-			emit_signal("request_split", self)
-		
-		if Input.is_action_just_pressed("merge"):
-			var slimesToMerge = mergeArea.get_overlapping_bodies()
-			if slimesToMerge.size() > 1:
-				emit_signal("request_merge", slimesToMerge)
-		
-		if Input.is_action_pressed("right"):
-			motion.x += ACCELERATION
-			$AnimatedSprite.flip_h = true
-			animatedSprite.animation = "run"
-		elif Input.is_action_pressed("left"):
-			motion.x -= ACCELERATION
-			$AnimatedSprite.flip_h = false
-			animatedSprite.animation = "run"
+		if Input.is_action_pressed("split"):
+			splitHoldTime += delta
+			if splitHoldTime > 1:
+				useAdvancedSplit = true
+			if useAdvancedSplit:
+				if Input.is_action_pressed("left"):
+					splitRatio = move_toward(splitRatio, .15, delta * RATIOADJUSTSPEED)
+				if Input.is_action_pressed("right"):
+					splitRatio = move_toward(splitRatio, .5, delta * RATIOADJUSTSPEED)					
 		else:
-			motion.x = lerp(motion.x, 0, .2)
-			animatedSprite.animation = "idle"
-		
-		if is_on_floor():
-			if Input.is_action_just_pressed("jump"):
-				motion.y = -JUMPFORCE
-	else:
-		motion.x = lerp(motion.x, 0, .2)
-		animatedSprite.animation = "idle"
 			
-	if motion.y < 0:
-		animatedSprite.animation = "jump"
-	elif motion.y > 0 and !is_on_floor():
-		animatedSprite.animation = "fall"
-	
-
-	
-	
-
+			if Input.is_action_just_released("split"):
+				
+				if useAdvancedSplit:
+					emit_signal("request_advanced_split", self, Vector2(), splitRatio)
+				else:
+					emit_signal("request_split", self)
+				splitHoldTime = 0
+				splitRatio = 0
+				useAdvancedSplit = false
+			
+			if Input.is_action_just_pressed("merge"):
+				var slimesToMerge = mergeArea.get_overlapping_bodies()
+				if slimesToMerge.size() > 1:
+					emit_signal("request_merge", slimesToMerge)
+			
+			if Input.is_action_pressed("right"):
+				motion.x += ACCELERATION * delta
+				$AnimatedSprite.flip_h = true
+				animatedSprite.animation = "run"
+			elif Input.is_action_pressed("left"):
+				motion.x -= ACCELERATION * delta
+				$AnimatedSprite.flip_h = false
+				animatedSprite.animation = "run"
+			else:
+				motion.x = lerp(motion.x, 0, .2)
+				animatedSprite.animation = "idle"
+			
+			if is_on_floor():
+				if Input.is_action_just_pressed("jump"):
+					motion.y = -JUMPFORCE
