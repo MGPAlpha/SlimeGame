@@ -55,8 +55,8 @@ func perform_advanced_split(slime, direction, massRatio):
 	inactiveSlime.position = slime.position
 	activeSlime.initialize(activeMass)
 	inactiveSlime.initialize(inactiveMass)
-	activeSlime.motion = slime.motion
-	inactiveSlime.motion = slime.motion
+	activeSlime.motion = direction / activeMass * 200
+	inactiveSlime.motion = -direction / inactiveMass * 200
 	activeSlime.isActiveSlime = true
 	add_child(activeSlime)
 	add_child(inactiveSlime)

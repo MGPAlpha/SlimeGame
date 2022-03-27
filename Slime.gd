@@ -37,9 +37,9 @@ func _physics_process(delta):
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
 
-	
-	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-	motion.x = move_toward(motion.x, 0, delta * DRAGX)
+	if is_on_floor():
+		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
+		motion.x = move_toward(motion.x, 0, delta * DRAGX)
 	
 	if isActiveSlime:
 		
@@ -57,7 +57,9 @@ func _physics_process(delta):
 			if Input.is_action_just_released("split"):
 				
 				if useAdvancedSplit:
-					emit_signal("request_advanced_split", self, Vector2(), splitRatio)
+					var splitDirection = get_viewport().get_mouse_position() - get_global_transform_with_canvas().get_origin()
+					splitDirection = splitDirection.normalized()
+					emit_signal("request_advanced_split", self, splitDirection, splitRatio)
 				else:
 					emit_signal("request_split", self)
 				splitHoldTime = 0
