@@ -18,10 +18,14 @@ var motion = Vector2()
 
 signal request_split
 signal request_merge
+signal request_switch
 
-func initialize(mass):
+var paused = false
+
+func initialize(mass, flipH = false):
 	self.mass = mass
 	scale *= sqrt(mass / 100.0)
+	$AnimatedSprite.flip_h = flipH
 
 func _physics_process(delta):
 	motion = move_and_slide(motion, UP)
@@ -35,7 +39,7 @@ func _physics_process(delta):
 	
 	
 	
-	if isActiveSlime:
+	if isActiveSlime && !paused:
 		
 		if Input.is_action_just_pressed("split"):
 			emit_signal("request_split", self)
@@ -44,32 +48,35 @@ func _physics_process(delta):
 			var slimesToMerge = mergeArea.get_overlapping_bodies()
 			if slimesToMerge.size() > 1:
 				emit_signal("request_merge", slimesToMerge)
+				
+		if Input.is_action_just_pressed("switch"):
+			emit_signal("request_switch", self)
 		
 		if Input.is_action_pressed("right"):
 			motion.x += ACCELERATION
 			$AnimatedSprite.flip_h = true
-			animatedSprite.animation = "run"
+			animatedSprite.play("active_run")
 		elif Input.is_action_pressed("left"):
 			motion.x -= ACCELERATION
 			$AnimatedSprite.flip_h = false
-			animatedSprite.animation = "run"
+			animatedSprite.play("active_run")
 		else:
 			motion.x = lerp(motion.x, 0, .2)
-			animatedSprite.animation = "idle"
+			animatedSprite.play("active_idle")
 		
 		if is_on_floor():
 			if Input.is_action_just_pressed("jump"):
 				motion.y = -JUMPFORCE
+		if motion.y < 0:
+			animatedSprite.play("active_jump")
+		elif motion.y > 0 and !is_on_floor():
+			animatedSprite.play("active_fall")
 	else:
 		motion.x = lerp(motion.x, 0, .2)
-		animatedSprite.animation = "idle"
+		animatedSprite.play("inactive_idle")
 			
 	if motion.y < 0:
-		animatedSprite.animation = "jump"
+		animatedSprite.play("inactive_jump")
 	elif motion.y > 0 and !is_on_floor():
-		animatedSprite.animation = "fall"
+		animatedSprite.play("inactive_fall")
 	
-
-	
-	
-
