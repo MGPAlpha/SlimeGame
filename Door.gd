@@ -4,8 +4,8 @@ extends AnimatedSprite
 # var a = 2
 # var b = "text"
 #onready var animatedSprite = $AnimatedSprite
-var button1_mass = 0
-var button2_mass = 0
+var button1_mass = 0.0
+var button2_mass = 0.0
 var button1 = false
 var button2 = false
 
@@ -27,20 +27,20 @@ func _process(delta):
 
 func _on_SlimeRoot_add_mass1(current_mass):
 	button1_mass += current_mass
-	if (button1_mass >= 25):
+	if (button1_mass >= .25):
 		button1 = true
 
 func _on_SlimeRoot_add_mass2(current_mass):
 	button2_mass += current_mass
-	if (button2_mass >= 25):
+	if (button2_mass >= .25):
 		button2 = true
 
 func _on_SlimeRoot_subtract_mass1(current_mass):
 	button1_mass -= current_mass
-	if (button1_mass < 25):
+	if (button1_mass < .25):
 		button1 = false
 
 func _on_SlimeRoot_subtract_mass2(current_mass):
 	button2_mass -= current_mass
-	if (button2_mass < 25):
+	if (button2_mass < .25):
 		button2 = false

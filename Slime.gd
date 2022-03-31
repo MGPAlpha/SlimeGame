@@ -9,7 +9,7 @@ const UP = Vector2(0, -1)
 const GRAVITY = 30
 const MAXFALLSPEED = 200
 const MAXSPEED = 300
-const JUMPFORCE = 500
+const JUMPFORCE = 550
 const ACCELERATION = 2000
 const DRAGX = 800
 const RATIOADJUSTSPEED = .3
@@ -17,6 +17,8 @@ const RATIOADJUSTSPEED = .3
 var mass = 1.0
 
 var motion = Vector2()
+var prevY = 16
+var turning = false
 
 var splitHoldTime = 0
 var useAdvancedSplit = false
@@ -35,15 +37,21 @@ func initialize(mass, flipH = false):
 	$AnimatedSprite.flip_h = flipH
 
 func _physics_process(delta):
+	prevY = position.y
 	motion = move_and_slide(motion, UP)
-	
-	motion.y += GRAVITY
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
+#	if (turning && (position.y - prevY) > 0):
+#		print(position.y)
+#		print(prevY)
+#		turning = false
+	motion.y += (GRAVITY + (abs(log(mass))))
+	if motion.y > min(MAXFALLSPEED + (50 * (1 + abs(log(mass)))), 1000):
+		motion.y = min(MAXFALLSPEED + (50 * (1 + abs(log(mass)))), 1000)
 
-	if is_on_floor():
-		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-		motion.x = move_toward(motion.x, 0, delta * DRAGX)
+	#if is_on_floor():
+#		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
+#		motion.x = move_toward(motion.x, 0, delta * DRAGX)
+	motion.x = clamp(motion.x, -(MAXSPEED + (1 - mass) / mass), (MAXSPEED + (1 - mass) / mass))
+	motion.x = move_toward(motion.x, 0, delta * DRAGX)
 	
 	if isActiveSlime && !paused:
 		
@@ -78,15 +86,22 @@ func _physics_process(delta):
 			if Input.is_action_pressed("right"):
 				motion.x += ACCELERATION * delta
 				$AnimatedSprite.flip_h = true
-				animatedSprite.animation = "active_run"
+				animatedSprite.play("active_run")
 			elif Input.is_action_pressed("left"):
 				motion.x -= ACCELERATION * delta
 				$AnimatedSprite.flip_h = false
-				animatedSprite.animation = "active_run"
+				animatedSprite.play("active_run")
 			else:
 				motion.x = lerp(motion.x, 0, .2)
-				animatedSprite.animation = "active_idle"
+				animatedSprite.play("active_idle")
 			
 			if is_on_floor():
 				if Input.is_action_just_pressed("jump"):
-					motion.y = -JUMPFORCE
+#					if mass == 1:
+#						motion.y = -JUMPFORCE 
+#					else:
+#						motion.y = -JUMPFORCE * (1 + ease(max(1 - mass, 0), 1))
+					turning = true
+					motion.y = -JUMPFORCE * ((1 + ease(max(1 - mass, 0) / 2, 1)))
+	elif !isActiveSlime && !paused:
+		animatedSprite.play("inactive_idle")

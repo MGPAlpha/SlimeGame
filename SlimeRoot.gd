@@ -32,10 +32,21 @@ func new_slime():
 	newSlime.connect("request_switch", self, "perform_switch")
 	return newSlime
 
+func _process(delta):
+	if Input.is_action_just_pressed("switch"):
+#		for slime in get_children():
+#			print(slime.name + ": " + String(slime.isActiveSlime))
+#		print("-------")
+		if get_children().size() > 1:
+			perform_switch(get_children())
+#			for slime in get_children():
+#				print(slime.name + ": " + String(slime.isActiveSlime))
+#			print("-------")
+
 func switch_camera(slime):
 	camera.get_parent().remove_child(camera)
 	slime.add_child(camera)
-	print(slime)
+	#print(slime)
 
 func perform_split(slime):
 	var oldMass = slime.mass
@@ -94,59 +105,18 @@ func perform_merge(slimes):
 	slimeArray.append(mergedSlime)
 	active = slimeArray.find(mergedSlime)
 
-func perform_switch(slime):
-#	print(slimeArray[active])
-	print("Initial")
-#	for child in get_children():
-#		print(child.name)
-	print(slime)
-	print(slimeArray[active])
-	print("--------")
-	if get_child_count() == 1:
-		if (active == (get_child_count() - 1)):
-			active = 0
-			get_child(active).isActiveSlime = true
-			slime.isActiveSlime = false
-			switch_camera(get_child(active))
+func perform_switch(slimes):
+	var switched = false
+	var index = 0
+	while !switched:
+		if (slimes[index % (slimes.size())].isActiveSlime):
+			slimes[index % (slimes.size())].isActiveSlime = false
+			index += 1
+			slimes[index % (slimes.size())].isActiveSlime = true
+			switch_camera(slimes[index % (slimes.size())])
+			switched = true
 		else:
-			active += 1
-			get_child(active).isActiveSlime = true
-			slime.isActiveSlime = false
-			get_child(active).isActiveSlime = true
-			switch_camera(get_child(active))
-	else:
-		print("Nothing happened")
-		#print(get_child(active))
-	print("Update")	
-#	for child in get_children():
-#		print(child.name)
-	print(slime)
-	print(slimeArray[active])
-	print("--------")
-	
-#	var allSlimes = get_children()
-#	if get_child_count() > 1:
-#		var index = 0
-#		for child in allSlimes:
-#			if child == slime:
-#				break
-#			else:
-#				index = index + 1
-#		if index == (get_child_count() - 1):
-#			print(allSlimes[0].name)
-#			slime.isActiveSlime = false
-#			allSlimes[0].isActiveSlime = true
-#			switch_camera(allSlimes[0])
-#		else:
-#			print(allSlimes[index+1])
-#			slime.isActiveSlime = false
-#			allSlimes[index + 1].isActiveSlime = true
-#			switch_camera(allSlimes[index + 1])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+			index += 1
 
 func _on_Area2D_Button1_body_entered(body):
 	if ("Slime" in body.name):

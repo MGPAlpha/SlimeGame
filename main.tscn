@@ -13,13 +13,13 @@
 [ext_resource path="res://Door.gd" type="Script" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0.947479, 0.876625, 15.9675, 1.03813, 16, 16, 0.947479, 15.4121 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0, 0.876625, 16, 1.03813, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0, 1.03813, 14.9765, 1.19964, 14.815, 16, 0, 16 )
 
 [sub_resource type="TileSet" id=6]
 0/name = "Terrain (16x16).png 0"
@@ -106,6 +106,7 @@ tile_data = PoolIntArray( 524309, 0, 0, 524310, 0, 1, 524311, 0, 1, 524312, 0, 1
 
 [node name="SlimeRoot" type="Node2D" parent="."]
 position = Vector2( 384, 112 )
+z_index = 1
 script = ExtResource( 2 )
 basicSlime = ExtResource( 1 )
 
@@ -118,59 +119,59 @@ scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 7 )
 script = ExtResource( 11 )
 
-[node name="Area2D_Button1" type="Area2D" parent="."]
-position = Vector2( 668, 120 )
-scale = Vector2( 0.2, 0.15 )
-script = ExtResource( 4 )
-
-[node name="Sprite" type="AnimatedSprite" parent="Area2D_Button1"]
-frames = SubResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_Button1"]
-position = Vector2( 0, -6.66669 )
-shape = SubResource( 9 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Area2D_Button1"]
-
-[node name="Base" type="CollisionShape2D" parent="Area2D_Button1/StaticBody2D"]
-position = Vector2( 0, 50 )
-shape = SubResource( 11 )
-
-[node name="Button" type="CollisionShape2D" parent="Area2D_Button1/StaticBody2D"]
-position = Vector2( 0, 7 )
-shape = SubResource( 12 )
-
-[node name="Area2D_Button2" type="Area2D" parent="."]
+[node name="Buttons" type="Node2D" parent="."]
 position = Vector2( 854, 120 )
 scale = Vector2( 0.2, 0.15 )
 script = ExtResource( 4 )
 
-[node name="Sprite" type="AnimatedSprite" parent="Area2D_Button2"]
-frames = SubResource( 8 )
+[node name="Area2D_Button1" type="Area2D" parent="Buttons"]
+position = Vector2( -930, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_Button2"]
+[node name="Sprite" type="AnimatedSprite" parent="Buttons/Area2D_Button1"]
+frames = SubResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buttons/Area2D_Button1"]
 position = Vector2( 0, -6.66669 )
 shape = SubResource( 9 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Area2D_Button2"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Buttons/Area2D_Button1"]
 
-[node name="Base" type="CollisionShape2D" parent="Area2D_Button2/StaticBody2D"]
+[node name="Base" type="CollisionShape2D" parent="Buttons/Area2D_Button1/StaticBody2D"]
 position = Vector2( 0, 50 )
 shape = SubResource( 11 )
 
-[node name="Button" type="CollisionShape2D" parent="Area2D_Button2/StaticBody2D"]
+[node name="Button" type="CollisionShape2D" parent="Buttons/Area2D_Button1/StaticBody2D"]
+position = Vector2( 0, 7 )
+shape = SubResource( 12 )
+
+[node name="Area2D_Button2" type="Area2D" parent="Buttons"]
+
+[node name="Sprite" type="AnimatedSprite" parent="Buttons/Area2D_Button2"]
+frames = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buttons/Area2D_Button2"]
+position = Vector2( 0, -6.66669 )
+shape = SubResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Buttons/Area2D_Button2"]
+
+[node name="Base" type="CollisionShape2D" parent="Buttons/Area2D_Button2/StaticBody2D"]
+position = Vector2( 0, 50 )
+shape = SubResource( 11 )
+
+[node name="Button" type="CollisionShape2D" parent="Buttons/Area2D_Button2/StaticBody2D"]
 position = Vector2( 0, 7 )
 shape = SubResource( 12 )
 
 [connection signal="add_mass1" from="SlimeRoot" to="Door" method="_on_SlimeRoot_add_mass1"]
-[connection signal="add_mass1" from="SlimeRoot" to="Area2D_Button1" method="_on_SlimeRoot_add_mass1"]
+[connection signal="add_mass1" from="SlimeRoot" to="Buttons" method="_on_SlimeRoot_add_mass1"]
 [connection signal="add_mass2" from="SlimeRoot" to="Door" method="_on_SlimeRoot_add_mass2"]
-[connection signal="add_mass2" from="SlimeRoot" to="Area2D_Button2" method="_on_SlimeRoot_add_mass2"]
+[connection signal="add_mass2" from="SlimeRoot" to="Buttons" method="_on_SlimeRoot_add_mass2"]
 [connection signal="subtract_mass1" from="SlimeRoot" to="Door" method="_on_SlimeRoot_subtract_mass1"]
-[connection signal="subtract_mass1" from="SlimeRoot" to="Area2D_Button1" method="_on_SlimeRoot_subtract_mass1"]
+[connection signal="subtract_mass1" from="SlimeRoot" to="Buttons" method="_on_SlimeRoot_subtract_mass1"]
 [connection signal="subtract_mass2" from="SlimeRoot" to="Door" method="_on_SlimeRoot_subtract_mass2"]
-[connection signal="subtract_mass2" from="SlimeRoot" to="Area2D_Button2" method="_on_SlimeRoot_subtract_mass2"]
-[connection signal="body_entered" from="Area2D_Button1" to="SlimeRoot" method="_on_Area2D_Button1_body_entered"]
-[connection signal="body_exited" from="Area2D_Button1" to="SlimeRoot" method="_on_Area2D_Button1_body_exited"]
-[connection signal="body_entered" from="Area2D_Button2" to="SlimeRoot" method="_on_Area2D_Button2_body_entered"]
-[connection signal="body_exited" from="Area2D_Button2" to="SlimeRoot" method="_on_Area2D_Button2_body_exited"]
+[connection signal="subtract_mass2" from="SlimeRoot" to="Buttons" method="_on_SlimeRoot_subtract_mass2"]
+[connection signal="body_entered" from="Buttons/Area2D_Button1" to="SlimeRoot" method="_on_Area2D_Button1_body_entered"]
+[connection signal="body_exited" from="Buttons/Area2D_Button1" to="SlimeRoot" method="_on_Area2D_Button1_body_exited"]
+[connection signal="body_entered" from="Buttons/Area2D_Button2" to="SlimeRoot" method="_on_Area2D_Button2_body_entered"]
+[connection signal="body_exited" from="Buttons/Area2D_Button2" to="SlimeRoot" method="_on_Area2D_Button2_body_exited"]
