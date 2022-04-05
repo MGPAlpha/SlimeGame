@@ -20,5 +20,6 @@ func _input(event):
 			key = event
 			self.text = key.as_text()
 			InputMap.action_add_event(action, key)
+			self.pressed = false
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		self.pressed = false
