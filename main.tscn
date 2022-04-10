@@ -1,15 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Prefabs/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://SlimeRoot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Pixel Adventure 1/Free/Terrain/Terrain (16x16).png" type="Texture" id=3]
 [ext_resource path="res://Pause.gd" type="Script" id=4]
-[ext_resource path="res://BindJump.gd" type="Script" id=5]
-[ext_resource path="res://BindSplit.gd" type="Script" id=6]
-[ext_resource path="res://BindMerge.gd" type="Script" id=7]
-[ext_resource path="res://BindPause.gd" type="Script" id=8]
-[ext_resource path="res://BindRight.gd" type="Script" id=9]
-[ext_resource path="res://BindLeft.gd" type="Script" id=10]
+[ext_resource path="res://Keybind.gd" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -85,8 +80,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 40.0
-margin_bottom = 40.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -124,17 +118,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_jump" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.46
 anchor_top = 0.4
 anchor_right = 0.54
 anchor_bottom = 0.4
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Jump"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_jump"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -145,17 +138,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_left" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.36
 anchor_top = 0.5
 anchor_right = 0.44
 anchor_bottom = 0.5
-script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Left"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_left"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -166,17 +158,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Right" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_right" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.56
 anchor_top = 0.5
 anchor_right = 0.64
 anchor_bottom = 0.5
-script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Right"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_right"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -187,17 +178,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Split" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_split" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.36
 anchor_top = 0.4
 anchor_right = 0.44
 anchor_bottom = 0.4
-script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Split"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_split"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -208,17 +198,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Merge" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_merge" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.56
 anchor_top = 0.4
 anchor_right = 0.64
 anchor_bottom = 0.4
-script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Merge"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_merge"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -229,18 +218,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pause" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Bind_pause" type="Button" parent="CanvasLayer/PauseMenu"]
 anchor_left = 0.26
 anchor_top = 0.3
 anchor_right = 0.34
 anchor_bottom = 0.3
 margin_bottom = 20.0
-script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Pause"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/Bind_pause"]
 anchor_right = 1.0
 margin_top = -50.0
 margin_bottom = -10.0
@@ -251,7 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PauseButton" type="Button" parent="CanvasLayer"]
+[node name="Pause" type="Button" parent="CanvasLayer"]
 anchor_left = 0.01
 anchor_top = 0.017
 anchor_right = 0.059
@@ -265,3 +253,10 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_jump" to="CanvasLayer/PauseMenu" method="_on_Bind_jump_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_left" to="CanvasLayer/PauseMenu" method="_on_Bind_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_right" to="CanvasLayer/PauseMenu" method="_on_Bind_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_split" to="CanvasLayer/PauseMenu" method="_on_Bind_split_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_merge" to="CanvasLayer/PauseMenu" method="_on_Bind_merge_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Bind_pause" to="CanvasLayer/PauseMenu" method="_on_Bind_pause_pressed"]
