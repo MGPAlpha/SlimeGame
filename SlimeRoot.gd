@@ -10,10 +10,10 @@ onready var camera = $Camera2D
 var active = 0
 var slimeArray = []
 
-signal add_mass1(current_mass)
-signal add_mass2(current_mass)
-signal subtract_mass1(current_mass)
-signal subtract_mass2(current_mass)
+#signal add_mass1(current_mass)
+#signal add_mass2(current_mass)
+#signal subtract_mass1(current_mass)
+#signal subtract_mass2(current_mass)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +32,7 @@ func new_slime():
 	newSlime.connect("request_switch", self, "perform_switch")
 	return newSlime
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("switch"):
 #		for slime in get_children():
 #			print(slime.name + ": " + String(slime.isActiveSlime))
@@ -118,18 +118,18 @@ func perform_switch(slimes):
 		else:
 			index += 1
 
-func _on_Area2D_Button1_body_entered(body):
-	if ("Slime" in body.name):
-		emit_signal("add_mass1", body.mass)
-
-func _on_Area2D_Button2_body_entered(body):
-	if ("Slime" in body.name):
-		emit_signal("add_mass2", body.mass)
-
-func _on_Area2D_Button1_body_exited(body):
-	if ("Slime" in body.name):
-		emit_signal("subtract_mass1", body.mass)
-
-func _on_Area2D_Button2_body_exited(body):
-	if ("Slime" in body.name):
-		emit_signal("subtract_mass2", body.mass)
+#func _on_Area2D_Button1_body_entered(body):
+#	if ("Slime" in body.name):
+#		emit_signal("add_mass1", body.mass)
+#
+#func _on_Area2D_Button2_body_entered(body):
+#	if ("Slime" in body.name):
+#		emit_signal("add_mass2", body.mass)
+#
+#func _on_Area2D_Button1_body_exited(body):
+#	if ("Slime" in body.name):
+#		emit_signal("subtract_mass1", body.mass)
+#
+#func _on_Area2D_Button2_body_exited(body):
+#	if ("Slime" in body.name):
+#		emit_signal("subtract_mass2", body.mass)
