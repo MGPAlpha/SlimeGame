@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FOOTSTEP_Asphalt_Trainers_Walk_Slow_RR1_mono.wav-f79847a2454e6dccb52b6486b8c57201.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/WalkCycle/FOOTSTEP_Asphalt_Trainers_Walk_Slow_RR1_mono.wav"
+dest_files=[ "res://.import/FOOTSTEP_Asphalt_Trainers_Walk_Slow_RR1_mono.wav-f79847a2454e6dccb52b6486b8c57201.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

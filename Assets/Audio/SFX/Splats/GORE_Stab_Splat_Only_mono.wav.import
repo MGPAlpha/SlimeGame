@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GORE_Stab_Splat_Only_mono.wav-46f90857e956ed03846fd0282eef9ff3.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Splats/GORE_Stab_Splat_Only_mono.wav"
+dest_files=[ "res://.import/GORE_Stab_Splat_Only_mono.wav-46f90857e956ed03846fd0282eef9ff3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

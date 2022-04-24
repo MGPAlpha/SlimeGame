@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Slime.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Platformer Pack Redux/Vector/vector_enemies.svg" type="Texture" id=2]
+[ext_resource path="res://Assets/Audio/SFX/WalkCycle/FOOTSTEPS_Asphalt_Trainers_Walk_Slow_x8_loop_mono.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Audio/SFX/Splats/GORE_Stab_03_mono.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
@@ -45,3 +47,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MergeArea"]
 position = Vector2( 0.485387, -5.82465 )
 shape = SubResource( 10 )
+
+[node name="AudioJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SlimeAction"
+
+[node name="AudioWalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+autoplay = true
+bus = "Walk"

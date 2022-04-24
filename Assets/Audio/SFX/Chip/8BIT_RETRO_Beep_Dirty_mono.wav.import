@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/8BIT_RETRO_Beep_Dirty_mono.wav-ce56ad0ae710a79a3cdc2737384cacce.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Chip/8BIT_RETRO_Beep_Dirty_mono.wav"
+dest_files=[ "res://.import/8BIT_RETRO_Beep_Dirty_mono.wav-ce56ad0ae710a79a3cdc2737384cacce.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

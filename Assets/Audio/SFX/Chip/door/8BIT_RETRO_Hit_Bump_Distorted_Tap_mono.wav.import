@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/8BIT_RETRO_Hit_Bump_Distorted_Tap_mono.wav-77d8f00797f40e307ca01726044abae9.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Chip/door/8BIT_RETRO_Hit_Bump_Distorted_Tap_mono.wav"
+dest_files=[ "res://.import/8BIT_RETRO_Hit_Bump_Distorted_Tap_mono.wav-77d8f00797f40e307ca01726044abae9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

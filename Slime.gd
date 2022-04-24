@@ -39,11 +39,13 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("split"):
 			emit_signal("request_split", self)
+			
 		
 		if Input.is_action_just_pressed("merge"):
 			var slimesToMerge = mergeArea.get_overlapping_bodies()
 			if slimesToMerge.size() > 1:
 				emit_signal("request_merge", slimesToMerge)
+				
 		
 		if Input.is_action_pressed("right"):
 			motion.x += ACCELERATION
@@ -56,10 +58,14 @@ func _physics_process(delta):
 		else:
 			motion.x = lerp(motion.x, 0, .2)
 			#animatedSprite.animation = "idle"
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Walk"), log(abs(motion.x*motion.x)/2))
+		if !$AudioWalk.playing:
+			$AudioWalk.play()
 		
 		if is_on_floor():
 			if Input.is_action_just_pressed("jump"):
 				motion.y = -JUMPFORCE
+				$AudioJump.play()
 	else:
 		motion.x = lerp(motion.x, 0, .2)
 		#animatedSprite.animation = "idle"

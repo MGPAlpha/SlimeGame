@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DRINK_Pour_Liquid_In_Glass_Splashy_mono.wav-46ad3c9319cfda5176bc937f2d775407.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Splats/DRINK_Pour_Liquid_In_Glass_Splashy_mono.wav"
+dest_files=[ "res://.import/DRINK_Pour_Liquid_In_Glass_Splashy_mono.wav-46ad3c9319cfda5176bc937f2d775407.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

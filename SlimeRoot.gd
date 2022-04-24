@@ -43,6 +43,7 @@ func perform_split(slime):
 	add_child(inactiveSlime)
 	switch_camera(activeSlime)
 	slime.queue_free()
+	$AudioSplit.play()
 
 func perform_merge(slimes):
 	var mergedSlime = new_slime()
@@ -58,6 +59,7 @@ func perform_merge(slimes):
 	mergedSlime.isActiveSlime = true
 	mergedSlime.initialize(totalMass)
 	add_child(mergedSlime)
+	$AudioMerge.play()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

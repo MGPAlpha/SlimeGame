@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/8BIT_RETRO_Powerup_Spawn_Quick_Climbing_mono.wav-c0bec18064c1f50c570305d99f105aab.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Chip/door/8BIT_RETRO_Powerup_Spawn_Quick_Climbing_mono.wav"
+dest_files=[ "res://.import/8BIT_RETRO_Powerup_Spawn_Quick_Climbing_mono.wav-c0bec18064c1f50c570305d99f105aab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

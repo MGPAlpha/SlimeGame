@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/BUTTON_Click_Organic_Glove_Compartment_01_stereo.wav-aee3726c683845f8a06f6e7a441344da.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Doors/BUTTON_Click_Organic_Glove_Compartment_01_stereo.wav"
+dest_files=[ "res://.import/BUTTON_Click_Organic_Glove_Compartment_01_stereo.wav-aee3726c683845f8a06f6e7a441344da.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
