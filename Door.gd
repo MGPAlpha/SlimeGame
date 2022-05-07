@@ -2,15 +2,13 @@ extends Area2D
 
 onready var animatedSprite = $AnimatedSprite
 
-var switch = 0
-
 func _ready():
 	pass
 
-func open_door():
+func activate():
 	animatedSprite.set_frame(1)
 
-func close_door():
+func deactivate():
 	animatedSprite.set_frame(0)
 
 #extends AnimatedSprite

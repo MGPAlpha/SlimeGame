@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Platformer Pack Redux/PNG/Tiles/torch2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Platformer Pack Redux/PNG/Tiles/torchOff.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Platformer Pack Redux/PNG/Tiles/torch1.png" type="Texture" id=3]
+[ext_resource path="res://Torch.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "on",
+"speed": 2.5
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "off",
+"speed": 5.0
+} ]
+
+[node name="Torch" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+frames = SubResource( 1 )
+animation = "off"

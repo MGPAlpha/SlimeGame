@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var basicButton
+export (String, "blue", "green", "red", "yellow") var color
 var button_array = []
 var trigger_array = []
 var trigger_total
@@ -19,6 +20,7 @@ func _ready():
 	for button in get_children():
 		button.connect("button_up", self, "released")
 		button.connect("button_down", self, "pressed")
+		button.set_color(color)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(_delta):
