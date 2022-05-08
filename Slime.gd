@@ -50,14 +50,14 @@ func _physics_process(delta):
 		if Input.is_action_pressed("right"):
 			motion.x += ACCELERATION
 			$AnimatedSprite.flip_h = true
-			#animatedSprite.animation = "run"
+			$AnimatedSprite.animation = "active_run"
 		elif Input.is_action_pressed("left"):
 			motion.x -= ACCELERATION
 			$AnimatedSprite.flip_h = false
-			#animatedSprite.animation = "run"
+			$AnimatedSprite.animation = "active_run"
 		else:
 			motion.x = lerp(motion.x, 0, .2)
-			#animatedSprite.animation = "idle"
+			animatedSprite.animation = "active_idle"
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Walk"), log(abs(motion.x*motion.x)))
 		if !$AudioWalk.playing:
 			$AudioWalk.play()
@@ -68,7 +68,7 @@ func _physics_process(delta):
 				$AudioJump.play()
 	else:
 		motion.x = lerp(motion.x, 0, .2)
-		#animatedSprite.animation = "idle"
+		$AnimatedSprite.animation = "inactive_idle"
 			
 	#if motion.y < 0:
 		#animatedSprite.animation = "jump"
