@@ -50,6 +50,7 @@ shape = SubResource( 10 )
 
 [node name="AudioJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+volume_db = -10.0
 bus = "SlimeAction"
 
 [node name="AudioWalk" type="AudioStreamPlayer2D" parent="."]

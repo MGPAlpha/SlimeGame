@@ -58,7 +58,7 @@ func _physics_process(delta):
 		else:
 			motion.x = lerp(motion.x, 0, .2)
 			#animatedSprite.animation = "idle"
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Walk"), log(abs(motion.x*motion.x)/2))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Walk"), log(abs(motion.x*motion.x)))
 		if !$AudioWalk.playing:
 			$AudioWalk.play()
 		
