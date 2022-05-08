@@ -57,7 +57,7 @@ position = Vector2( 0, -12.8088 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 8 )
 animation = "active_idle"
-frame = 5
+frame = 7
 playing = true
 flip_h = true
 
@@ -82,6 +82,6 @@ bus = "SlimeAction"
 
 [node name="AudioWalk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
-volume_db = -10.0
+volume_db = -15.0
 autoplay = true
 bus = "Walk"
